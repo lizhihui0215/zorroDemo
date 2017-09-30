@@ -5,9 +5,9 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SiginComponent } from './sigin/sigin.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModule } from 'ng-zorro-antd/src/release/ng-zorro-antd.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd/src/release/ng-zorro-antd.modul
     FormsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
     AuthRoutingModule
