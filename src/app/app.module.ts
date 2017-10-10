@@ -8,13 +8,13 @@ import { AuthModule } from './auth/auth.module';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgZorroAntdModule } from 'ng-zorro-antd/src/release/ng-zorro-antd.module';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { AuthService } from './shared/auth.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
