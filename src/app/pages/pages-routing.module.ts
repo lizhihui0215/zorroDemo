@@ -10,8 +10,8 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule'},
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-      { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule'}
     ]
   }
 ];

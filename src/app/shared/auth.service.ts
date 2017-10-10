@@ -17,14 +17,19 @@ export class AuthService {
     const body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
+    body.set('remember', 'false');
 
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
 
+    const user = new User('', '', '');
+
+    this.localStorageService.set('user', user);
+
     this.http.post<Response<User>>('http://localhost:8080/login/auth', body.toString(), options).subscribe(
       response => {
-        let res = response.result;
+        const res = response.result;
         this.localStorageService.set('user', res);
       },
       error => {

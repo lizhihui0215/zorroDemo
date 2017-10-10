@@ -23,9 +23,11 @@ export class PagesComponent implements OnInit {
 
   menuTo(menu: String) {
     if ('dashboard' === menu) {
-      this.router.navigate(['dashboard']);
-    }else if ('inInventory' === menu) {
-      this.router.navigate(['inventory', 'inInventory']);
+      this.router.navigate(['pages', 'dashboard']);
+    }else if ('in-inventory' === menu) {
+      this.router.navigate(['pages', 'inventory', 'in-inventory']);
+    }else if ('out-inventory' === menu) {
+      this.router.navigate(['pages', 'inventory', 'out-inventory']);
     }
   }
 }
