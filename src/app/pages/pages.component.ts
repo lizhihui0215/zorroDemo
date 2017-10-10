@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pages.component.css']
 })
 export class PagesComponent implements OnInit {
+  isCollapsed = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -18,5 +19,13 @@ export class PagesComponent implements OnInit {
     console.log('logout');
     this.authService.logout();
     this.router.navigate(['sigin']);
+  }
+
+  menuTo(menu: String) {
+    if ('dashboard' === menu) {
+      this.router.navigate(['dashboard']);
+    }else if ('inInventory' === menu) {
+      this.router.navigate(['inventory', 'inInventory']);
+    }
   }
 }
