@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-sigin',
@@ -21,12 +22,19 @@ export class SiginComponent implements OnInit {
     if (this.validateForm.valid) {
       const username = this.validateForm.controls.userName.value;
       const password = this.validateForm.controls.password.value;
-      this.authService.login(username, password);
-      this.router.navigate(['pages']);
+      this.authService.login(username, password).subscribe(response => {
+        if (response.code === 1001) {
+          this.router.navigate(['pages']);
+        }else {
+          this.confirmServ.error({title: '错误！', content: response.message, okText: 'OK'});
+        }
+      }, error => {
+        this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
+      });
     }
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private confirmServ: NzModalService) {
   }
 
   ngOnInit() {

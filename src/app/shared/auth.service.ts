@@ -3,7 +3,9 @@ import { User } from '../model/user';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from './response';
-import { Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
+import 'rxjs/add/operator/do';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +15,7 @@ export class AuthService {
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient) { }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<Response<User>> {
     const body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
@@ -23,19 +25,10 @@ export class AuthService {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
 
-    const user = new User('', '', '');
-
-    this.localStorageService.set('user', user);
-
-    this.http.post<Response<User>>('http://localhost:8080/login/auth', body.toString(), options).subscribe(
-      response => {
-        const res = response.result;
-        this.localStorageService.set('user', res);
-      },
-      error => {
-        console.log('Error occured' + error);
-      }
-    );
+    return this.http.post<Response<User>>('http://localhost:8080/login/auth', body.toString(), options).do(response => {
+      const res = response.results;
+      this.localStorageService.set('user', res);
+    });
   }
 
   logout() {
