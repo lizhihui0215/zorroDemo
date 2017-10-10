@@ -14,7 +14,6 @@ export class AuthService {
   constructor(private localStorageService: LocalStorageService, private http: HttpClient) { }
 
   login(username: string, password: string) {
-    const user = new User(username, password, '');
     const body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
@@ -25,14 +24,13 @@ export class AuthService {
 
     this.http.post<Response<User>>('http://localhost:8080/login/auth', body.toString(), options).subscribe(
       response => {
-        console.log(response);
+        let res = response.result;
+        this.localStorageService.set('user', res);
       },
       error => {
         console.log('Error occured' + error);
       }
     );
-
-    this.localStorageService.set('user', user);
   }
 
   logout() {
