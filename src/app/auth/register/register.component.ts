@@ -52,8 +52,8 @@ export class RegisterComponent implements OnInit {
       checkPassword    : [ null, [ Validators.required, this.confirmationValidator ] ],
       nickname         : [ null, [ Validators.required ] ],
       phoneNumberPrefix: [ '+86' ],
-      phoneNumber      : [ null, [ Validators.required ] ],
-      website          : [ null, [ Validators.required ] ],
+      phone      : [ null, [ Validators.required ] ],
+      birthday          : [ null, [ Validators.required ] ],
       captcha          : [ null, [ Validators.required ] ],
       agree            : [ true ]
     });
