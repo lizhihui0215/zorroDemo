@@ -7,6 +7,15 @@
         <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
           <div nz-form-item nz-row>
             <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+              <label for="username" nz-form-item-required>username</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('username')">
+              <nz-input [nzSize]="'large'" formControlName="username" [nzId]="'username'"></nz-input>
+              <div nz-form-explain *ngIf="getFormControl('username').dirty&&getFormControl('username').hasError('required')">请输入用户名!</div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
               <label for="email" nz-form-item-required>E-mail</label>
             </div>
             <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('email')">
