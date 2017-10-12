@@ -8,7 +8,14 @@ export class User {
   phone: string;
   uuid: number;
 
-  constructor(username: string, password: string, brithday: Date, email: string, name: string, nickname: string, phone: string, uuid: number) {
+  constructor(username: string,
+              password: string,
+              brithday: Date,
+              email: string,
+              name: string,
+              nickname: string,
+              phone: string,
+              uuid: number) {
     this.username = username;
     this.password = password;
     this.brithday = brithday;

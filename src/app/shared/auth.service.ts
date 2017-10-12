@@ -33,6 +33,7 @@ export class AuthService {
 
   logout() {
     this.localStorageService.remove('user');
+    this.http.post<Response<string>>('http://localhost:8080/auth/signout', null);
   }
 
   signup(user: User): Observable<Response<string>> {
