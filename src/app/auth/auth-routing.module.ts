@@ -4,7 +4,7 @@ import { SiginComponent } from './sigin/sigin.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  {path: 'sigin', component: SiginComponent},
+  {path: 'signin', component: SiginComponent},
   {path: 'register', component: RegisterComponent}
 ];
 

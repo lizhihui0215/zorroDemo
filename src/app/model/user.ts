@@ -6,9 +6,9 @@ export class User {
   name: string;
   nickname: string;
   phone: string;
-  uuid: string;
+  uuid: number;
 
-  constructor(username: string, password: string, brithday: Date, email: string, name: string, nickname: string, phone: string, uuid: string) {
+  constructor(username: string, password: string, brithday: Date, email: string, name: string, nickname: string, phone: string, uuid: number) {
     this.username = username;
     this.password = password;
     this.brithday = brithday;

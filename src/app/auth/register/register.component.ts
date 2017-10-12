@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/auth.service';
-import { User } from '../../model/user';
+import { NzModalService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,22 @@ export class RegisterComponent implements OnInit {
     }
 
     if (this.validateForm.valid) {
-      this.authService.signup(this.validateForm.value);
+      this.authService.signup(this.validateForm.value).subscribe(response => {
+        if (response.code === 1001) {
+          this.router.navigate(['signin']);
+        }else {
+          this.confirmServ.error({title: '错误！', content: response.message, okText: 'OK'});
+        }
+      }, error => {
+        this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
+      });
     }
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              private confirmServ: NzModalService) {
   }
 
   updateConfirmValidator() {
@@ -38,7 +50,7 @@ export class RegisterComponent implements OnInit {
     } else if (control.value !== this.validateForm.controls[ 'password' ].value) {
       return { confirm: true, error: true };
     }
-  };
+  }
 
   getCaptcha(e: MouseEvent) {
     e.preventDefault();
@@ -47,13 +59,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.validateForm = this.fb.group({
       username            : [ null, [ Validators.required ] ],
+      name            : [ null, [ Validators.required ] ],
       email            : [ null, [ Validators.email ] ],
       password         : [ null, [ Validators.required ] ],
       checkPassword    : [ null, [ Validators.required, this.confirmationValidator ] ],
       nickname         : [ null, [ Validators.required ] ],
       phoneNumberPrefix: [ '+86' ],
       phone      : [ null, [ Validators.required ] ],
-      birthday          : [ null, [ Validators.required ] ],
+      brithday          : [ null, [ Validators.required ] ],
       captcha          : [ null, [ Validators.required ] ],
       agree            : [ true ]
     });

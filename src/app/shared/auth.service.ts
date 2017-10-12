@@ -25,7 +25,7 @@ export class AuthService {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
 
-    return this.http.post<Response<User>>('http://localhost:8080/login/auth', body.toString(), options).do(response => {
+    return this.http.post<Response<User>>('http://localhost:8080/auth/signin', body.toString(), options).do(response => {
       const res = response.results;
       this.localStorageService.set('user', res);
     });
@@ -35,7 +35,7 @@ export class AuthService {
     this.localStorageService.remove('user');
   }
 
-  signup(user: User) {
-    console.log(user);
+  signup(user: User): Observable<Response<string>> {
+    return this.http.post<Response<string>>('http://localhost:8080/auth/signup', user);
   }
 }

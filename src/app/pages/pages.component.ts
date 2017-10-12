@@ -18,7 +18,7 @@ export class PagesComponent implements OnInit {
   logout() {
     console.log('logout');
     this.authService.logout();
-    this.router.navigate(['sigin']);
+    this.router.navigate(['signin']);
   }
 
   menuTo(menu: String) {
