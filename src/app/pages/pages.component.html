@@ -10,11 +10,25 @@
       <li nz-submenu>
         <span title><i class="anticon anticon-database"></i><span class="nav-text">仓库</span></span>
         <ul>
-          <li nz-menu-item (click)="menuTo('in-inventory')">入库</li>
-          <li nz-menu-item (click)="menuTo('out-inventory')">出库</li>
+          <li nz-menu-item>
+            <a routerLink="/pages/inventory/in-inventory" routerLinkActive="active">入库</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/pages/inventory/out-inventory" routerLinkActive="active">出库</a>
+          </li>
         </ul>
       </li>
-      <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span></li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-setting"></i><span class="nav-text">设置</span></span>
+        <ul>
+          <li nz-menu-item>
+            <a routerLink="/pages/inventory/in-inventory" routerLinkActive="active">用户管理</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/pages/inventory/out-inventory" routerLinkActive="active">其他</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -22,11 +36,8 @@
       <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
       <i style="float: right" class="anticon anticon-logout" (click)="logout()"></i>
     </nz-header>
-    <nz-content style="margin:0 16px;">
-      <nz-breadcrumb style="margin:12px 0;">
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-      </nz-breadcrumb>
+    <nz-content style="margin:12px 16px;">
+
       <div style="padding:24px; background: #fff; min-height: 360px;">
         <router-outlet></router-outlet>
       </div>
