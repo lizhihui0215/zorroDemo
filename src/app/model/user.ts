@@ -6,16 +6,18 @@ export class User {
   name: string;
   nickname: string;
   phone: string;
-  uuid: number;
+  id: number;
+  rememberMe: boolean;
 
   constructor(username: string,
               password: string,
-              brithday: Date,
-              email: string,
-              name: string,
-              nickname: string,
-              phone: string,
-              uuid: number) {
+              rememberMe: boolean,
+              brithday?: Date,
+              email?: string,
+              name?: string,
+              nickname?: string,
+              phone?: string,
+              id?: number) {
     this.username = username;
     this.password = password;
     this.brithday = brithday;
@@ -23,6 +25,7 @@ export class User {
     this.name = name;
     this.nickname = nickname;
     this.phone = phone;
-    this.uuid = uuid;
+    this.id = id;
+    this.rememberMe = rememberMe;
   }
 }

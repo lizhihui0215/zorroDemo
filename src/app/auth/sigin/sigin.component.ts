@@ -22,7 +22,8 @@ export class SiginComponent implements OnInit {
     if (this.validateForm.valid) {
       const username = this.validateForm.controls.userName.value;
       const password = this.validateForm.controls.password.value;
-      this.authService.login(username, password).subscribe(response => {
+      const rememberMe = this.validateForm.controls.rememberMe.value;
+      this.authService.login(username, password, rememberMe).subscribe(response => {
         if (response.code === 1001) {
           this.router.navigate(['pages']);
         }else {
@@ -41,7 +42,7 @@ export class SiginComponent implements OnInit {
     this.validateForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],
       password: [ null, [ Validators.required ] ],
-      remember: [ true ],
+      rememberMe: [ true ],
     });
   }
 

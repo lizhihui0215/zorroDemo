@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-pages',
@@ -10,15 +11,21 @@ import { Router } from '@angular/router';
 export class PagesComponent implements OnInit {
   isCollapsed = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private confirmServ: NzModalService) { }
 
   ngOnInit() {
   }
 
   logout() {
-    console.log('logout');
-    this.authService.logout();
-    this.router.navigate(['signin']);
+    this.authService.logout().subscribe(response => {
+      if (response.code === 1001) {
+        this.router.navigate(['signin']);
+      }else {
+        this.confirmServ.error({title: '错误！', content: response.message, okText: 'OK'});
+      }
+    }, error => {
+      this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
+    });
   }
 
   menuTo(menu: String) {
