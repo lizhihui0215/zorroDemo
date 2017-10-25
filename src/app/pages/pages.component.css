@@ -9,6 +9,10 @@
   display: none;
 }
 
+.ant-layout-footer {
+  padding: 0;
+}
+
 :host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
   display: none;
 }
