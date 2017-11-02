@@ -1,3 +1,5 @@
+import { Role } from './role';
+
 export class User {
   username: string;
   password: string;
@@ -8,6 +10,8 @@ export class User {
   phone: string;
   id: number;
   rememberMe: boolean;
+  address: string;
+  roles: [Role];
 
   constructor(username: string,
               password: string,

@@ -27,14 +27,4 @@ export class PagesComponent implements OnInit {
       this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
     });
   }
-
-  menuTo(menu: String) {
-    if ('dashboard' === menu) {
-      this.router.navigate(['pages', 'dashboard']);
-    }else if ('in-inventory' === menu) {
-      this.router.navigate(['pages', 'inventory', 'in-inventory']);
-    }else if ('out-inventory' === menu) {
-      this.router.navigate(['pages', 'inventory', 'out-inventory']);
-    }
-  }
 }

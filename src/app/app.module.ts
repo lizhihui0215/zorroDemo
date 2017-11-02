@@ -11,6 +11,8 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { AuthService } from './shared/auth.service';
 import {HttpClientModule} from '@angular/common/http';
+import { UserService } from './shared/user.service';
+import { RoleService } from './shared/role.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import {HttpClientModule} from '@angular/common/http';
     PagesModule,
     AppRoutingModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

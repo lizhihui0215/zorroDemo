@@ -4,7 +4,7 @@
       Camile
     </div>
     <ul nz-menu  [nzMode]="isCollapsed?'vertical':'inline'">
-      <li nzSelected="true" nz-menu-item (click)="menuTo('dashboard')">
+      <li nz-menu-item>
         <span title><i class="anticon anticon-appstore"></i><span class="nav-text">Dashboard</span></span>
       </li>
       <li nz-submenu>
@@ -25,7 +25,7 @@
             <a routerLink="/pages/setting/user" routerLinkActive="active">用户管理</a>
           </li>
           <li nz-menu-item>
-            <a routerLink="/pages/inventory/out-inventory" routerLinkActive="active">其他</a>
+            <a routerLink="/pages/setting/menu" routerLinkActive="active">菜单配置</a>
           </li>
         </ul>
       </li>

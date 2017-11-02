@@ -33,7 +33,7 @@ export class AuthService extends Service {
       withCredentials: true
     };
 
-    return this.http.post<Response<User>>('http://localhost:8080/auth/signin', body.toString(), options).do(response => {
+    return this.http.post<Response<User>>('http://localhost:8081/auth/signin', body.toString(), options).do(response => {
       const res = response.results;
       this.localStorageService.set('user', res);
     });
@@ -41,11 +41,11 @@ export class AuthService extends Service {
 
   logout(): Observable<Response<string>> {
     this.localStorageService.remove('user');
-    return this.http.get<Response<string>>('http://localhost:8080/auth/signout', {withCredentials: true});
+    return this.http.get<Response<string>>('http://localhost:8081/auth/signout', {withCredentials: true});
   }
 
   signup(user: User): Observable<Response<string>> {
-    return this.http.post<Response<string>>('http://localhost:8080/auth/signup', user);
+    return this.http.post<Response<string>>('http://localhost:8081/auth/signup', user);
   }
 
   isAuthenticated(): Observable<Response<boolean>> {
@@ -53,7 +53,7 @@ export class AuthService extends Service {
     if (user == null) {
       return Observable.of(new Response('success', 1001, false));
     }
-    return this.http.get<Response<boolean>>('http://localhost:8080/auth/isAuthenticated',
+    return this.http.get<Response<boolean>>('http://localhost:8081/auth/isAuthenticated',
       {withCredentials: true});
   }
 }
