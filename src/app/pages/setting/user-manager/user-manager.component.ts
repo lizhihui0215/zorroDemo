@@ -26,6 +26,7 @@ export class UserManagerComponent implements OnInit {
   roles: Role[] = [];
   users: User[] = [];
   copyData: User[] = [];
+  selectedRole: Role;
 
 
   constructor(private userService: UserService,
@@ -43,7 +44,8 @@ export class UserManagerComponent implements OnInit {
     rolesObservable.switchMap(response => {
       const roles = response.results;
       this.roles = roles;
-      return this.userService.users(this.roles[0].id);
+      this.selectedRole = this.roles[0];
+      return this.userService.users(this.selectedRole.id);
     }).subscribe(response => {
       if (response.code === 1001) {
         this.users = response.results;
@@ -100,7 +102,28 @@ export class UserManagerComponent implements OnInit {
     this.search();
   }
 
-  roleClick() {
+  roleClick(role: Role) {
+    this.selectedRole = role;
+    this.userService.users(role.id).subscribe(response => {
+      if (response.code === 1001) {
+        this.users = response.results;
+        this.copyData = [...this.users];
+        this.filterAddressArray = this.users.map(function (user) {
+          return {name: user.address, value: false};
+        });
+      }else {
+        this.confirmServ.error({title: '错误！', content: response.message, okText: 'OK'});
+      }
+    }, error => {
+      this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
+    });
+  }
 
+  isRoleSelected(role: Role): boolean {
+    return this.selectedRole === role;
+  }
+
+  test() {
+    console.log('test');
   }
 }

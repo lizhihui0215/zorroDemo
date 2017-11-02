@@ -6,18 +6,18 @@
 <div nz-row>
   <div nz-col [nzSpan]="2" >
     <ul nz-menu [nzMode]="'inline'">
-      <li nz-menu-item *ngFor="let role of roles" (click)="roleClick()">
+      <li nz-menu-item *ngFor="let role of roles" (click)="roleClick(role)" nzSelected="isRoleSelected(role)">
         <span title>{{role.roleName}}</span>
       </li>
     </ul>
   </div>
   <div nz-col [nzSpan]="20" >
+    <span title><i class="anticon anticon-user-add"></i><a (click)="test()">添加用户</a></span>
     <nz-table #nzTable [nzDataSource]="users" [nzPageSize]="10">
       <thead nz-thead>
       <tr>
         <th nz-th>
           <span>用户名</span>
-
         </th>
         <th nz-th>
           <span>姓名</span>
