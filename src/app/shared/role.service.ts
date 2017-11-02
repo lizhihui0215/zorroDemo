@@ -15,7 +15,7 @@ export class RoleService {
   }
 
   roles(): Observable<Response<[Role]>> {
-    return this.http.get<Response<[Role]>>(`${this.roleURL}/'role'`, {withCredentials: true});
+    return this.http.get<Response<[Role]>>(`${this.roleURL}/'roles'`, {withCredentials: true});
   }
 
 }
