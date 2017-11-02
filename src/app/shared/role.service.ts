@@ -11,11 +11,11 @@ export class RoleService {
   private roleURL: string;
 
   constructor(private http: HttpClient, @Inject(SERVER_URL) public serverURL: string) {
-    this.roleURL = `${serverURL}/'role'`;
+    this.roleURL = `${serverURL}/role`;
   }
 
   roles(): Observable<Response<[Role]>> {
-    return this.http.get<Response<[Role]>>(`${this.roleURL}/'roles'`, {withCredentials: true});
+    return this.http.get<Response<[Role]>>(`${this.roleURL}/roles`, {withCredentials: true});
   }
 
 }

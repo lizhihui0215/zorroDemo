@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,17 +9,21 @@ import {Observable} from 'rxjs/Observable';
 import {Service} from './service';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/of';
+import { SERVER_URL } from './server-url';
 
 @Injectable()
 export class AuthService extends Service {
+  private authURL: string;
+
   get isLoggedin(): boolean {
     const user: User = this.localStorageService.get<User>('user');
     if (user != null ) { return user.rememberMe; }
     return false;
   }
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient) {
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient, @Inject(SERVER_URL) public serverURL: string) {
     super();
+    this.authURL = `${serverURL}/auth`;
   }
 
   login(username: string, password: string, rememberMe: boolean): Observable<Response<User>> {
@@ -33,7 +37,7 @@ export class AuthService extends Service {
       withCredentials: true
     };
 
-    return this.http.post<Response<User>>('http://localhost:8081/auth/signin', body.toString(), options).do(response => {
+    return this.http.post<Response<User>>(`${this.authURL}/signin`, body.toString(), options).do(response => {
       const res = response.results;
       this.localStorageService.set('user', res);
     });
@@ -41,11 +45,11 @@ export class AuthService extends Service {
 
   logout(): Observable<Response<string>> {
     this.localStorageService.remove('user');
-    return this.http.get<Response<string>>('http://localhost:8081/auth/signout', {withCredentials: true});
+    return this.http.get<Response<string>>(`${this.authURL}/signout`, {withCredentials: true});
   }
 
   signup(user: User): Observable<Response<string>> {
-    return this.http.post<Response<string>>('http://localhost:8081/auth/signup', user);
+    return this.http.post<Response<string>>(`${this.authURL}/signup`, user);
   }
 
   isAuthenticated(): Observable<Response<boolean>> {
@@ -53,7 +57,7 @@ export class AuthService extends Service {
     if (user == null) {
       return Observable.of(new Response('success', 1001, false));
     }
-    return this.http.get<Response<boolean>>('http://localhost:8081/auth/isAuthenticated',
+    return this.http.get<Response<boolean>>(`${this.authURL}/isAuthenticated`,
       {withCredentials: true});
   }
 }
