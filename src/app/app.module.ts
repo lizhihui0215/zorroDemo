@@ -13,6 +13,7 @@ import { AuthService } from './shared/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import { UserService } from './shared/user.service';
 import { RoleService } from './shared/role.service';
+import { SERVER_URL } from './shared/server-url';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { RoleService } from './shared/role.service';
     PagesModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, UserService, RoleService],
+  providers: [AuthService, UserService, RoleService, { provide: SERVER_URL, useValue:   'http://localhost:8081' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
