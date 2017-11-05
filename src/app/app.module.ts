@@ -33,7 +33,7 @@ import { SERVER_URL } from './shared/server-url';
     PagesModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, UserService, RoleService, { provide: SERVER_URL, useValue:   'http://localhost:8081' }],
+  providers: [AuthService, UserService, RoleService, { provide: SERVER_URL, useValue:   'http://localhost:8080' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
