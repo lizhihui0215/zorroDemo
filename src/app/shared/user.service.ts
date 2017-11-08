@@ -13,7 +13,7 @@ export class UserService {
     this.userURL = `${serverURL}/user`;
   }
 
-  users(roleId: string): Observable<Response<[User]>> {
+  users(roleId: number): Observable<Response<[User]>> {
     const url = `${this.userURL}/${roleId}`;
     return this.http.get<Response<[User]>>(url, {withCredentials: true});
   }
