@@ -26,7 +26,7 @@ export class SiginComponent implements OnInit {
       this.authService.login(username, password, rememberMe).subscribe(response => {
         if (response.code === 1001) {
           this.router.navigate(['pages']);
-        }else {
+        } else {
           this.confirmServ.error({
             nzTitle: '错误',
             nzContent: response.message,
