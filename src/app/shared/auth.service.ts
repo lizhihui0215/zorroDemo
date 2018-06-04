@@ -4,12 +4,12 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from './response';
 import { URLSearchParams } from '@angular/http';
-import 'rxjs/add/operator/do';
-import {Observable} from 'rxjs/Observable';
+
 import {Service} from './service';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/of';
+
+
 import { SERVER_URL } from './server-url';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService extends Service {

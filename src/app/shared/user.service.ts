@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { User } from '../model/user';
 import { Response } from './response';
 import { SERVER_URL } from './server-url';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class UserService {

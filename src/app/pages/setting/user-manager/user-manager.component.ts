@@ -4,9 +4,9 @@ import { RoleService } from '../../../shared/role.service';
 import { Role } from '../../../model/role';
 import { Response } from '../../../shared/response';
 import { NzModalService } from 'ng-zorro-antd';
-import { Observable } from 'rxjs/Observable';
 import { User } from '../../../model/user';
-import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Rx';
+
 
 @Component({
   selector: 'app-user-manager',
@@ -36,7 +36,7 @@ export class UserManagerComponent implements OnInit {
     rolesObservable.do(response => {
       if (response.code === 1001) {
         this.roles = response.results;
-      }else {
+      } else {
         this.confirmServ.error({
           nzTitle: '错误',
           nzContent: response.message,
@@ -45,19 +45,21 @@ export class UserManagerComponent implements OnInit {
       }
     });
 
-    rolesObservable.switchMap(response => {
+    const usersR = rolesObservable.switchMap(response => {
       const roles = response.results;
       this.roles = roles;
       this.selectedRole = this.roles[0];
       return this.userService.users(this.selectedRole.id);
-    }).subscribe(response => {
+    });
+
+    usersR.subscribe(response => {
       if (response.code === 1001) {
         this.users = response.results;
         this.copyData = [...this.users];
         this.filterAddressArray = this.users.map(function (user) {
           return {name: user.address, value: false};
         });
-      }else {
+      } else {
         this.confirmServ.error({
           nzTitle: '错误',
           nzContent: response.message,

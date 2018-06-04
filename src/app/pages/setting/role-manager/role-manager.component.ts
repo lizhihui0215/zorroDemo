@@ -4,9 +4,9 @@ import { RoleService } from '../../../shared/role.service';
 import { Role } from '../../../model/role';
 import { Response } from '../../../shared/response';
 import { NzModalService } from 'ng-zorro-antd';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
-import 'rxjs/add/operator/switchMap';
+
 import {UserSelectedComponent} from '../../shared/user-selected/user-selected.component';
 
 @Component({
