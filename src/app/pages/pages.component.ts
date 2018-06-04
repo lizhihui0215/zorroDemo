@@ -21,10 +21,18 @@ export class PagesComponent implements OnInit {
       if (response.code === 1001) {
         this.router.navigate(['signin']);
       }else {
-        this.confirmServ.error({title: '错误！', content: response.message, okText: 'OK'});
+        this.confirmServ.error({
+          nzTitle: '错误',
+          nzContent: response.message,
+          nzOkText: 'OK',
+        });
       }
     }, error => {
-      this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
+      this.confirmServ.error({
+        nzTitle: '错误',
+        nzContent: error.message,
+        nzOkText: 'OK',
+      });
     });
   }
 }

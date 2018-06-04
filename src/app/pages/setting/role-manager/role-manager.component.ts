@@ -44,10 +44,18 @@ export class RoleManagerComponent implements OnInit {
           this.roles = response.results;
           this.selectedRole = this.roles[0];
       }else {
-        this.confirmServ.error({title: '错误！', content: response.message, okText: 'OK'});
+        this.confirmServ.error({
+          nzTitle: '错误',
+          nzContent: response.message,
+          nzOkText: 'OK',
+        });
       }
     }, error => {
-      this.confirmServ.error({title: '错误！', content: error.message, okText: 'OK'});
+      this.confirmServ.error({
+        nzTitle: '错误',
+        nzContent: error.message,
+        nzOkText: 'OK',
+      });
     });
   }
 
